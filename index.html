@@ -61,28 +61,27 @@
                 </div>
                 
                 <!-- Cake Cutting Animation -->
-                <div class="cake-container">
-                    <button id="cut-cake-btn">🎂 Cut the Cake!</button>
-                    <div class="cake-animation" id="cakeAnimation">
-                        <div class="cake">
-                            <div class="candles">
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
+                <div class="cake-section">
+                    <div class="birthday-cake" id="birthdayCake">
+                        <div class="cake-top">
+                            <div class="candle-group">
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
+                                <div class="candle"><div class="flame"></div></div>
                             </div>
-                            <div class="cake-layer layer1"></div>
-                            <div class="cake-layer layer2"></div>
-                            <div class="cake-layer layer3"></div>
                         </div>
-                        <div class="knife" id="knife"></div>
-                        <div class="cake-slice" id="cakeSlice"></div>
+                        <div class="cake-body">
+                            <div class="cake-tier tier-1"></div>
+                            <div class="cake-tier tier-2"></div>
+                            <div class="cake-tier tier-3"></div>
+                        </div>
                     </div>
+                    <button class="blow-candles-btn" id="blowBtn">
+                        💨 Blow Candles & Cut Cake!
+                    </button>
+                    <div class="wish-text" id="wishText">🎉 Make a wish! 🎉</div>
                 </div>
             </div>
             <div class="right">
@@ -307,44 +306,47 @@ Stay blessed, stay happy, always 💕✨
 
     createConfetti();
 
-    // Cake Cutting Animation
-    const cutCakeBtn = document.getElementById('cut-cake-btn');
-    const cakeAnimation = document.getElementById('cakeAnimation');
-    const knife = document.getElementById('knife');
-    const cakeSlice = document.getElementById('cakeSlice');
+    // Better Cake Animation
+    const blowBtn = document.getElementById('blowBtn');
+    const cake = document.getElementById('birthdayCake');
+    const wishText = document.getElementById('wishText');
     
-    cutCakeBtn.addEventListener('click', function() {
-        cakeAnimation.style.display = 'block';
-        cutCakeBtn.style.display = 'none';
+    blowBtn.addEventListener('click', function() {
+        // Hide button
+        blowBtn.style.display = 'none';
         
-        // Blow out candles
-        setTimeout(() => {
-            document.querySelectorAll('.flame').forEach(flame => {
-                flame.style.animation = 'blowOut 0.5s forwards';
-            });
-        }, 1000);
+        // Show wish text
+        wishText.style.display = 'block';
         
-        // Cut the cake
-        setTimeout(() => {
-            knife.classList.add('cutting');
-        }, 2000);
+        // Blow out candles with stagger effect
+        const flames = document.querySelectorAll('.flame');
+        flames.forEach((flame, index) => {
+            setTimeout(() => {
+                flame.style.animation = 'blowOut 0.8s forwards';
+            }, index * 200);
+        });
         
+        // Shake cake
         setTimeout(() => {
-            cakeSlice.classList.add('sliced');
-            // Create more confetti on cake cut
+            cake.classList.add('shake');
+        }, 1500);
+        
+        // Split cake
+        setTimeout(() => {
+            cake.classList.add('split');
             createConfetti();
-        }, 3500);
+            createConfetti();
+        }, 2500);
         
-        // Reset after animation
+        // Reset
         setTimeout(() => {
-            cakeAnimation.style.display = 'none';
-            cutCakeBtn.style.display = 'block';
-            knife.classList.remove('cutting');
-            cakeSlice.classList.remove('sliced');
-            document.querySelectorAll('.flame').forEach(flame => {
-                flame.style.animation = 'flicker 0.3s infinite';
+            cake.classList.remove('shake', 'split');
+            flames.forEach(flame => {
+                flame.style.animation = 'flicker 0.5s infinite alternate';
             });
-        }, 7000);
+            blowBtn.style.display = 'block';
+            wishText.style.display = 'none';
+        }, 6000);
     });
 
     // Sparkles on mouse move
