@@ -60,19 +60,66 @@
                     </button>
                 </div>
                 
-                <!-- Simple Cake Animation -->
-                <div class="simple-cake-section">
-                    <div class="simple-cake" id="simpleCake">
-                        <div class="cake-candles">
-                            <span class="candle-flame">🕯️</span>
-                            <span class="candle-flame">🕯️</span>
-                            <span class="candle-flame">🕯️</span>
-                        </div>
-                        <div class="cake-emoji">🎂</div>
-                    </div>
-                    <button class="simple-blow-btn" id="simpleBlowBtn">
-                        💨 Blow & Cut Cake!
+                <!-- Modern Cake Cutting -->
+                <div class="modern-cake-wrapper">
+                    <button class="modern-cake-btn" id="modernCakeBtn">
+                        🎂 Cut the Cake
                     </button>
+                    <div class="modern-cake-container" id="modernCakeContainer">
+                        <svg class="cake-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Candle flames -->
+                            <g class="flames-group">
+                                <ellipse class="flame" cx="100" cy="80" rx="8" ry="12" fill="url(#flameGradient)"/>
+                                <ellipse class="flame" cx="150" cy="75" rx="8" ry="12" fill="url(#flameGradient)"/>
+                                <ellipse class="flame" cx="200" cy="80" rx="8" ry="12" fill="url(#flameGradient)"/>
+                            </g>
+                            
+                            <!-- Candles -->
+                            <rect x="96" y="90" width="8" height="30" fill="#FFD700" rx="2"/>
+                            <rect x="146" y="85" width="8" height="30" fill="#FFD700" rx="2"/>
+                            <rect x="196" y="90" width="8" height="30" fill="#FFD700" rx="2"/>
+                            
+                            <!-- Cake layers -->
+                            <g class="cake-group">
+                                <rect class="cake-layer-1" x="50" y="120" width="200" height="50" rx="10" fill="url(#cakeGradient1)"/>
+                                <ellipse cx="150" cy="125" rx="100" ry="10" fill="#FF69B4" opacity="0.3"/>
+                                
+                                <rect class="cake-layer-2" x="40" y="165" width="220" height="55" rx="10" fill="url(#cakeGradient2)"/>
+                                <ellipse cx="150" cy="170" rx="110" ry="10" fill="#FFC0CB" opacity="0.3"/>
+                                
+                                <rect class="cake-layer-3" x="30" y="215" width="240" height="60" rx="15" fill="url(#cakeGradient3)"/>
+                                <ellipse cx="150" cy="220" rx="120" ry="12" fill="#FFE4E1" opacity="0.3"/>
+                            </g>
+                            
+                            <!-- Knife -->
+                            <g class="knife-group">
+                                <rect x="280" y="150" width="15" height="4" fill="#8B4513" rx="2"/>
+                                <polygon points="295,148 320,152 295,156" fill="#C0C0C0"/>
+                            </g>
+                            
+                            <!-- Gradients -->
+                            <defs>
+                                <linearGradient id="flameGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FFEB3B;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#FF9800;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#FF5722;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="cakeGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#FF1493;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="cakeGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FFC0CB;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#FF69B4;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="cakeGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FFE4E1;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#FFC0CB;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="wish-message" id="wishMessage">🎉 Happy Birthday Sameera! 🎉</div>
+                    </div>
                 </div>
             </div>
             <div class="right">
@@ -297,35 +344,59 @@ Stay blessed, stay happy, always 💕✨
 
     createConfetti();
 
-    // Simple Smooth Cake Animation
-    const simpleBlowBtn = document.getElementById('simpleBlowBtn');
-    const simpleCake = document.getElementById('simpleCake');
+    // Modern Cake Cutting Animation
+    const modernCakeBtn = document.getElementById('modernCakeBtn');
+    const modernCakeContainer = document.getElementById('modernCakeContainer');
+    const wishMessage = document.getElementById('wishMessage');
     
-    simpleBlowBtn.addEventListener('click', function() {
-        simpleBlowBtn.disabled = true;
-        simpleBlowBtn.style.opacity = '0.5';
+    modernCakeBtn.addEventListener('click', function() {
+        modernCakeContainer.style.display = 'block';
+        modernCakeBtn.style.display = 'none';
         
-        // Candles disappear
-        simpleCake.classList.add('blow');
+        const flames = document.querySelectorAll('.flame');
+        const knifeGroup = document.querySelector('.knife-group');
+        const cakeGroup = document.querySelector('.cake-group');
         
-        // Explode confetti
+        // Blow candles
         setTimeout(() => {
-            createConfetti();
-            createConfetti();
-            createConfetti();
-        }, 1000);
+            flames.forEach((flame, i) => {
+                setTimeout(() => {
+                    flame.style.opacity = '0';
+                    flame.style.transform = 'scale(0.5) translateY(-20px)';
+                }, i * 300);
+            });
+        }, 500);
         
-        // Cake celebration
+        // Move knife
         setTimeout(() => {
-            simpleCake.classList.add('celebrate');
-        }, 1200);
+            knifeGroup.style.transform = 'translateX(-140px)';
+        }, 2000);
+        
+        // Cut and explode cake
+        setTimeout(() => {
+            cakeGroup.style.opacity = '0';
+            cakeGroup.style.transform = 'scale(1.5)';
+            wishMessage.style.display = 'block';
+            
+            // Massive confetti
+            for(let i = 0; i < 5; i++) {
+                setTimeout(() => createConfetti(), i * 100);
+            }
+        }, 3000);
         
         // Reset
         setTimeout(() => {
-            simpleCake.classList.remove('blow', 'celebrate');
-            simpleBlowBtn.disabled = false;
-            simpleBlowBtn.style.opacity = '1';
-        }, 4000);
+            modernCakeContainer.style.display = 'none';
+            modernCakeBtn.style.display = 'block';
+            flames.forEach(flame => {
+                flame.style.opacity = '1';
+                flame.style.transform = 'scale(1) translateY(0)';
+            });
+            knifeGroup.style.transform = 'translateX(0)';
+            cakeGroup.style.opacity = '1';
+            cakeGroup.style.transform = 'scale(1)';
+            wishMessage.style.display = 'none';
+        }, 7000);
     });
 
     // Sparkles on mouse move
