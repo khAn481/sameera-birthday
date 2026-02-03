@@ -634,6 +634,195 @@ body {
     50% { transform: translateY(-20px); }
 }
 
+/* Cake Cutting Animation */
+.cake-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#cut-cake-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #f5576c 100%);
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+    transition: all 0.3s ease;
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+#cut-cake-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(245, 87, 108, 0.6);
+}
+
+.cake-animation {
+    display: none;
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 30px auto;
+}
+
+.cake {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.candles {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+}
+
+.candle {
+    width: 8px;
+    height: 40px;
+    background: linear-gradient(to bottom, #fff 0%, #ffeb3b 100%);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+}
+
+.flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 18px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.3s infinite;
+    box-shadow: 0 0 10px #ff9800, 0 0 20px #ff5722;
+}
+
+@keyframes flicker {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1, 0.9); }
+}
+
+@keyframes blowOut {
+    0% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.5) translateY(-20px); }
+}
+
+.cake-layer {
+    width: 200px;
+    height: 60px;
+    margin: 0 auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.layer1 {
+    background: linear-gradient(to bottom, #ff69b4 0%, #ff1493 100%);
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.layer2 {
+    background: linear-gradient(to bottom, #ffc0cb 0%, #ff69b4 100%);
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: -5px;
+}
+
+.layer3 {
+    background: linear-gradient(to bottom, #ffe4e1 0%, #ffc0cb 100%);
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: -5px;
+    height: 70px;
+}
+
+/* Decorative frosting */
+.layer1::before,
+.layer2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    border-radius: 10px 10px 0 0;
+}
+
+.knife {
+    position: absolute;
+    top: 50px;
+    right: -50px;
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(to right, #8b4513 0%, #8b4513 30%, #c0c0c0 30%, #c0c0c0 100%);
+    border-radius: 0 2px 2px 0;
+    transform-origin: left center;
+    opacity: 0;
+}
+
+.knife.cutting {
+    animation: cutCake 2s ease-in-out forwards;
+}
+
+@keyframes cutCake {
+    0% {
+        opacity: 1;
+        transform: rotate(-45deg) translateX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(5deg) translateX(100px);
+    }
+}
+
+.cake-slice {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 120px solid #ff69b4;
+    opacity: 0;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.cake-slice.sliced {
+    animation: slideSlice 1.5s ease-out forwards;
+}
+
+@keyframes slideSlice {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(100px) translateY(50px) rotate(25deg);
+    }
+}
+
 /* Mail Box */
 .boxMail {
     position: fixed;
