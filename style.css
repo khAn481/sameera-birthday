@@ -634,172 +634,69 @@ body {
     50% { transform: translateY(-20px); }
 }
 
-/* Better Cake Animation */
-.cake-section {
+/* Simple Smooth Cake Animation */
+.simple-cake-section {
     margin-top: 40px;
     text-align: center;
 }
 
-.birthday-cake {
-    width: 250px;
-    margin: 0 auto 30px;
+.simple-cake {
+    font-size: 120px;
+    margin: 20px auto;
+    display: inline-block;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.cake-candles {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    font-size: 40px;
     transition: all 0.5s ease;
 }
 
-.cake-top {
-    position: relative;
-    z-index: 10;
+.candle-flame {
+    animation: candleFlicker 1s ease-in-out infinite;
 }
 
-.candle-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: -20px;
+@keyframes candleFlicker {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.1) translateY(-3px); }
 }
 
-.candle {
-    width: 10px;
-    height: 50px;
-    background: linear-gradient(to bottom, #ffd700 0%, #ffeb3b 100%);
-    border-radius: 5px 5px 0 0;
-    position: relative;
-    box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
+.cake-emoji {
+    animation: cakeBounce 2s ease-in-out infinite;
 }
 
-.flame {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 15px;
-    height: 25px;
-    background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    animation: flicker 0.5s infinite alternate;
-    box-shadow: 
-        0 0 20px #ff9800,
-        0 0 30px #ff5722,
-        0 0 40px rgba(255, 87, 34, 0.5);
+@keyframes cakeBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-@keyframes flicker {
-    0% { 
-        transform: translateX(-50%) scaleY(1) scaleX(1);
-        opacity: 1;
-    }
-    100% { 
-        transform: translateX(-50%) scaleY(1.15) scaleX(0.95);
-        opacity: 0.9;
-    }
+/* Blow Animation */
+.simple-cake.blow .cake-candles {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50px) scale(0.5);
 }
 
-@keyframes blowOut {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) scaleY(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: translateX(-50%) scaleY(0.5) scaleX(1.5);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) scaleY(0.1) translateY(-30px);
-    }
+/* Celebrate Animation */
+.simple-cake.celebrate {
+    animation: cakeCelebrate 1s ease-in-out;
 }
 
-.cake-body {
-    position: relative;
+@keyframes cakeCelebrate {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-10deg); }
+    50% { transform: scale(1.3) rotate(10deg); }
+    75% { transform: scale(1.2) rotate(-5deg); }
 }
 
-.cake-tier {
-    margin: 0 auto;
-    border-radius: 15px;
-    box-shadow: 
-        0 5px 15px rgba(0,0,0,0.2),
-        inset 0 -10px 20px rgba(0,0,0,0.1);
-    position: relative;
-}
-
-.tier-1 {
-    width: 200px;
-    height: 60px;
-    background: linear-gradient(to bottom, #ff69b4 0%, #ff1493 100%);
-    border: 4px solid #fff;
-}
-
-.tier-1::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5%;
-    right: 5%;
-    height: 8px;
-    background: repeating-linear-gradient(
-        90deg,
-        #fff 0px,
-        #fff 15px,
-        transparent 15px,
-        transparent 30px
-    );
-    border-radius: 50%;
-}
-
-.tier-2 {
-    width: 220px;
-    height: 70px;
-    background: linear-gradient(to bottom, #ffc0cb 0%, #ff69b4 100%);
-    border: 4px solid #fff;
-    margin-top: -5px;
-}
-
-.tier-2::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 10%;
-    right: 10%;
-    height: 10px;
-    background: repeating-linear-gradient(
-        90deg,
-        #fff 0px,
-        #fff 12px,
-        transparent 12px,
-        transparent 24px
-    );
-    border-radius: 50%;
-}
-
-.tier-3 {
-    width: 250px;
-    height: 80px;
-    background: linear-gradient(to bottom, #ffe4e1 0%, #ffc0cb 100%);
-    border: 4px solid #fff;
-    margin-top: -5px;
-    border-radius: 15px 15px 20px 20px;
-}
-
-.tier-3::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 8%;
-    right: 8%;
-    height: 12px;
-    background: repeating-linear-gradient(
-        90deg,
-        #fff 0px,
-        #fff 18px,
-        transparent 18px,
-        transparent 36px
-    );
-    border-radius: 50%;
-}
-
-.blow-candles-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.simple-blow-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     border: none;
     padding: 18px 40px;
     border-radius: 50px;
@@ -807,65 +704,18 @@ body {
     font-weight: 700;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 10px 25px rgba(245, 87, 108, 0.5);
     transition: all 0.3s ease;
     margin-top: 20px;
 }
 
-.blow-candles-btn:hover {
+.simple-blow-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.7);
+    box-shadow: 0 15px 35px rgba(245, 87, 108, 0.7);
 }
 
-.wish-text {
-    display: none;
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff;
-    margin-top: 20px;
-    text-shadow: 
-        0 0 10px rgba(255, 107, 157, 0.8),
-        0 0 20px rgba(255, 107, 157, 0.6);
-    animation: wishPulse 1s ease-in-out infinite;
-}
-
-@keyframes wishPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.birthday-cake.shake {
-    animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px) rotate(-2deg); }
-    75% { transform: translateX(10px) rotate(2deg); }
-}
-
-.birthday-cake.split .tier-1 {
-    animation: splitLeft 1s ease-out forwards;
-}
-
-.birthday-cake.split .tier-2 {
-    animation: splitRight 1s ease-out forwards;
-    animation-delay: 0.1s;
-}
-
-.birthday-cake.split .tier-3 {
-    animation: splitLeft 1s ease-out forwards;
-    animation-delay: 0.2s;
-}
-
-@keyframes splitLeft {
-    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateX(-150px) rotate(-30deg); opacity: 0.5; }
-}
-
-@keyframes splitRight {
-    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateX(150px) rotate(30deg); opacity: 0.5; }
+.simple-blow-btn:disabled {
+    cursor: not-allowed;
 }
 
 /* Mail Box */
