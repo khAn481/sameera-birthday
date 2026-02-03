@@ -634,193 +634,238 @@ body {
     50% { transform: translateY(-20px); }
 }
 
-/* Cake Cutting Animation */
-.cake-container {
-    margin-top: 30px;
+/* Better Cake Animation */
+.cake-section {
+    margin-top: 40px;
     text-align: center;
 }
 
-#cut-cake-btn {
-    background: linear-gradient(135deg, #ff6b9d 0%, #f5576c 100%);
-    border: none;
-    padding: 15px 35px;
-    border-radius: 50px;
-    font-size: 22px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
-    transition: all 0.3s ease;
-    animation: buttonPulse 2s ease-in-out infinite;
-}
-
-#cut-cake-btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(245, 87, 108, 0.6);
-}
-
-.cake-animation {
-    display: none;
+.birthday-cake {
+    width: 250px;
+    margin: 0 auto 30px;
     position: relative;
-    width: 300px;
-    height: 350px;
-    margin: 30px auto;
+    transition: all 0.5s ease;
 }
 
-.cake {
+.cake-top {
     position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-}
-
-.candles {
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
     z-index: 10;
 }
 
+.candle-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: -20px;
+}
+
 .candle {
-    width: 8px;
-    height: 40px;
-    background: linear-gradient(to bottom, #fff 0%, #ffeb3b 100%);
-    border-radius: 4px 4px 0 0;
+    width: 10px;
+    height: 50px;
+    background: linear-gradient(to bottom, #ffd700 0%, #ffeb3b 100%);
+    border-radius: 5px 5px 0 0;
     position: relative;
+    box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
 }
 
 .flame {
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 12px;
-    height: 18px;
-    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
+    width: 15px;
+    height: 25px;
+    background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    animation: flicker 0.3s infinite;
-    box-shadow: 0 0 10px #ff9800, 0 0 20px #ff5722;
+    animation: flicker 0.5s infinite alternate;
+    box-shadow: 
+        0 0 20px #ff9800,
+        0 0 30px #ff5722,
+        0 0 40px rgba(255, 87, 34, 0.5);
 }
 
 @keyframes flicker {
-    0%, 100% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.1, 0.9); }
+    0% { 
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(-50%) scaleY(1.15) scaleX(0.95);
+        opacity: 0.9;
+    }
 }
 
 @keyframes blowOut {
-    0% { opacity: 1; transform: translateX(-50%) scale(1); }
-    100% { opacity: 0; transform: translateX(-50%) scale(0.5) translateY(-20px); }
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(-50%) scaleY(0.5) scaleX(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scaleY(0.1) translateY(-30px);
+    }
 }
 
-.cake-layer {
-    width: 200px;
-    height: 60px;
-    margin: 0 auto;
-    border-radius: 10px;
+.cake-body {
     position: relative;
 }
 
-.layer1 {
+.cake-tier {
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 
+        0 5px 15px rgba(0,0,0,0.2),
+        inset 0 -10px 20px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.tier-1 {
+    width: 200px;
+    height: 60px;
     background: linear-gradient(to bottom, #ff69b4 0%, #ff1493 100%);
-    border: 3px solid #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 4px solid #fff;
 }
 
-.layer2 {
-    background: linear-gradient(to bottom, #ffc0cb 0%, #ff69b4 100%);
-    border: 3px solid #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: -5px;
-}
-
-.layer3 {
-    background: linear-gradient(to bottom, #ffe4e1 0%, #ffc0cb 100%);
-    border: 3px solid #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: -5px;
-    height: 70px;
-}
-
-/* Decorative frosting */
-.layer1::before,
-.layer2::before {
+.tier-1::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 15px;
+    top: 5px;
+    left: 5%;
+    right: 5%;
+    height: 8px;
     background: repeating-linear-gradient(
         90deg,
         #fff 0px,
-        #fff 10px,
-        transparent 10px,
-        transparent 20px
+        #fff 15px,
+        transparent 15px,
+        transparent 30px
     );
-    border-radius: 10px 10px 0 0;
+    border-radius: 50%;
 }
 
-.knife {
+.tier-2 {
+    width: 220px;
+    height: 70px;
+    background: linear-gradient(to bottom, #ffc0cb 0%, #ff69b4 100%);
+    border: 4px solid #fff;
+    margin-top: -5px;
+}
+
+.tier-2::before {
+    content: '';
     position: absolute;
-    top: 50px;
-    right: -50px;
-    width: 100px;
-    height: 20px;
-    background: linear-gradient(to right, #8b4513 0%, #8b4513 30%, #c0c0c0 30%, #c0c0c0 100%);
-    border-radius: 0 2px 2px 0;
-    transform-origin: left center;
-    opacity: 0;
+    top: 8px;
+    left: 10%;
+    right: 10%;
+    height: 10px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 12px,
+        transparent 12px,
+        transparent 24px
+    );
+    border-radius: 50%;
 }
 
-.knife.cutting {
-    animation: cutCake 2s ease-in-out forwards;
+.tier-3 {
+    width: 250px;
+    height: 80px;
+    background: linear-gradient(to bottom, #ffe4e1 0%, #ffc0cb 100%);
+    border: 4px solid #fff;
+    margin-top: -5px;
+    border-radius: 15px 15px 20px 20px;
 }
 
-@keyframes cutCake {
-    0% {
-        opacity: 1;
-        transform: rotate(-45deg) translateX(0);
-    }
-    50% {
-        opacity: 1;
-        transform: rotate(0deg) translateX(100px);
-    }
-    100% {
-        opacity: 1;
-        transform: rotate(5deg) translateX(100px);
-    }
-}
-
-.cake-slice {
+.tier-3::before {
+    content: '';
     position: absolute;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 120px solid #ff69b4;
-    opacity: 0;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    top: 10px;
+    left: 8%;
+    right: 8%;
+    height: 12px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 18px,
+        transparent 18px,
+        transparent 36px
+    );
+    border-radius: 50%;
 }
 
-.cake-slice.sliced {
-    animation: slideSlice 1.5s ease-out forwards;
+.blow-candles-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+    transition: all 0.3s ease;
+    margin-top: 20px;
 }
 
-@keyframes slideSlice {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) rotate(0deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(100px) translateY(50px) rotate(25deg);
-    }
+.blow-candles-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.7);
+}
+
+.wish-text {
+    display: none;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 20px;
+    text-shadow: 
+        0 0 10px rgba(255, 107, 157, 0.8),
+        0 0 20px rgba(255, 107, 157, 0.6);
+    animation: wishPulse 1s ease-in-out infinite;
+}
+
+@keyframes wishPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.birthday-cake.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px) rotate(-2deg); }
+    75% { transform: translateX(10px) rotate(2deg); }
+}
+
+.birthday-cake.split .tier-1 {
+    animation: splitLeft 1s ease-out forwards;
+}
+
+.birthday-cake.split .tier-2 {
+    animation: splitRight 1s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+.birthday-cake.split .tier-3 {
+    animation: splitLeft 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes splitLeft {
+    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateX(-150px) rotate(-30deg); opacity: 0.5; }
+}
+
+@keyframes splitRight {
+    0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateX(150px) rotate(30deg); opacity: 0.5; }
 }
 
 /* Mail Box */
