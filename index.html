@@ -60,28 +60,19 @@
                     </button>
                 </div>
                 
-                <!-- Cake Cutting Animation -->
-                <div class="cake-section">
-                    <div class="birthday-cake" id="birthdayCake">
-                        <div class="cake-top">
-                            <div class="candle-group">
-                                <div class="candle"><div class="flame"></div></div>
-                                <div class="candle"><div class="flame"></div></div>
-                                <div class="candle"><div class="flame"></div></div>
-                                <div class="candle"><div class="flame"></div></div>
-                                <div class="candle"><div class="flame"></div></div>
-                            </div>
+                <!-- Simple Cake Animation -->
+                <div class="simple-cake-section">
+                    <div class="simple-cake" id="simpleCake">
+                        <div class="cake-candles">
+                            <span class="candle-flame">🕯️</span>
+                            <span class="candle-flame">🕯️</span>
+                            <span class="candle-flame">🕯️</span>
                         </div>
-                        <div class="cake-body">
-                            <div class="cake-tier tier-1"></div>
-                            <div class="cake-tier tier-2"></div>
-                            <div class="cake-tier tier-3"></div>
-                        </div>
+                        <div class="cake-emoji">🎂</div>
                     </div>
-                    <button class="blow-candles-btn" id="blowBtn">
-                        💨 Blow Candles & Cut Cake!
+                    <button class="simple-blow-btn" id="simpleBlowBtn">
+                        💨 Blow & Cut Cake!
                     </button>
-                    <div class="wish-text" id="wishText">🎉 Make a wish! 🎉</div>
                 </div>
             </div>
             <div class="right">
@@ -306,47 +297,35 @@ Stay blessed, stay happy, always 💕✨
 
     createConfetti();
 
-    // Better Cake Animation
-    const blowBtn = document.getElementById('blowBtn');
-    const cake = document.getElementById('birthdayCake');
-    const wishText = document.getElementById('wishText');
+    // Simple Smooth Cake Animation
+    const simpleBlowBtn = document.getElementById('simpleBlowBtn');
+    const simpleCake = document.getElementById('simpleCake');
     
-    blowBtn.addEventListener('click', function() {
-        // Hide button
-        blowBtn.style.display = 'none';
+    simpleBlowBtn.addEventListener('click', function() {
+        simpleBlowBtn.disabled = true;
+        simpleBlowBtn.style.opacity = '0.5';
         
-        // Show wish text
-        wishText.style.display = 'block';
+        // Candles disappear
+        simpleCake.classList.add('blow');
         
-        // Blow out candles with stagger effect
-        const flames = document.querySelectorAll('.flame');
-        flames.forEach((flame, index) => {
-            setTimeout(() => {
-                flame.style.animation = 'blowOut 0.8s forwards';
-            }, index * 200);
-        });
-        
-        // Shake cake
+        // Explode confetti
         setTimeout(() => {
-            cake.classList.add('shake');
-        }, 1500);
-        
-        // Split cake
-        setTimeout(() => {
-            cake.classList.add('split');
             createConfetti();
             createConfetti();
-        }, 2500);
+            createConfetti();
+        }, 1000);
+        
+        // Cake celebration
+        setTimeout(() => {
+            simpleCake.classList.add('celebrate');
+        }, 1200);
         
         // Reset
         setTimeout(() => {
-            cake.classList.remove('shake', 'split');
-            flames.forEach(flame => {
-                flame.style.animation = 'flicker 0.5s infinite alternate';
-            });
-            blowBtn.style.display = 'block';
-            wishText.style.display = 'none';
-        }, 6000);
+            simpleCake.classList.remove('blow', 'celebrate');
+            simpleBlowBtn.disabled = false;
+            simpleBlowBtn.style.opacity = '1';
+        }, 4000);
     });
 
     // Sparkles on mouse move
